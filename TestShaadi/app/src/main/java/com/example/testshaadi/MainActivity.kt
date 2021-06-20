@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.room.Room
 import com.example.testshaadi.data.ResponseData
 import com.example.testshaadi.database.AppDatabase
-import com.example.testshaadi.database.ResultsEntity
+import com.example.testshaadi.database.Results
 import com.example.testshaadi.repository.RestClient
 import retrofit2.Call
 import retrofit2.Callback
@@ -19,7 +19,7 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var adapter: RecyclerAdapter
     private lateinit var linearLayoutManager: LinearLayoutManager
-    private var users: List<ResultsEntity> = emptyList()
+    private var users: List<Results> = emptyList()
     private lateinit var recyclerView: RecyclerView
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -53,8 +53,7 @@ class MainActivity : AppCompatActivity() {
                 Log.e("MainActivity", "responseData " + responseData.results.size)
 
                 for (i in 0..responseData.results.size - 1) {
-                    val asdft: ResultsEntity = responseData.results[i]
-                    userDao.insert(asdft)
+                    userDao.insert(responseData.results[i])
                 }
                 users = userDao.getAllUsers()
                 Log.e("MainActivity", "users " + users.size)

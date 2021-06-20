@@ -6,15 +6,15 @@ import androidx.room.PrimaryKey
 import com.example.testshaadi.data.ResponseClass
 import com.google.gson.annotations.SerializedName
 
-@Entity(tableName = "coordinates_table")
-data class CoordinatesEntity(
+@Entity(tableName = "id_table")
+data class Id(
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = ResponseClass.SRNO_STRING)
     var srNo: Int,
-    @ColumnInfo(name = ResponseClass.LATITUDE_STRING)
-    @SerializedName(ResponseClass.LATITUDE_STRING)
-    var latitude: String,
-    @ColumnInfo(name = ResponseClass.LONGITUDE_STRING)
-    @SerializedName(ResponseClass.LONGITUDE_STRING)
-    var longitude: String
+    @ColumnInfo(name = ResponseClass.NAME_STRING)
+    @SerializedName(ResponseClass.NAME_STRING)
+    var name: String,
+    @ColumnInfo(name = ResponseClass.VALUE_STRING)
+    @SerializedName(ResponseClass.VALUE_STRING)
+    var value: String
 )

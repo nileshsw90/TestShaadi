@@ -5,9 +5,9 @@ import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 
 @Database(
-    entities = [ResultsEntity::class, DobEntity::class, IdEntity::class, CoordinatesEntity::class,
-        InfoEntity::class, LocationEntity::class, LoginEntity::class, NameEntity::class,
-        StreetEntity::class, TimezoneEntity::class],
+    entities = [Results::class, Dob::class, Id::class, Coordinates::class,
+        Info::class, Location::class, Login::class, Name::class,
+        Street::class, Timezone::class],
     version = 1,
     exportSchema = false
 )

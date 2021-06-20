@@ -7,7 +7,7 @@ import com.example.testshaadi.data.ResponseClass
 import com.google.gson.annotations.SerializedName
 
 @Entity(tableName = "picture_table")
-data class PictureEntity(
+data class Picture(
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = ResponseClass.SRNO_STRING)
     var srNo: Int,

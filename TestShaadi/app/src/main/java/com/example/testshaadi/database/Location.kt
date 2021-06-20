@@ -7,13 +7,13 @@ import com.example.testshaadi.data.ResponseClass
 import com.google.gson.annotations.SerializedName
 
 @Entity(tableName = "location_table")
-data class LocationEntity(
+data class Location(
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = ResponseClass.SRNO_STRING)
     var srNo: Int,
     @ColumnInfo(name = ResponseClass.STREET_STRING)
     @SerializedName(ResponseClass.STREET_STRING)
-    var street: StreetEntity,
+    var street: Street,
     @ColumnInfo(name = ResponseClass.CITY_STRING)
     @SerializedName(ResponseClass.CITY_STRING)
     var city: String,
@@ -28,8 +28,8 @@ data class LocationEntity(
     var postcode: Int,
     @ColumnInfo(name = ResponseClass.COORDINATES_STRING)
     @SerializedName(ResponseClass.COORDINATES_STRING)
-    var coordinates: CoordinatesEntity,
+    var coordinates: Coordinates,
     @ColumnInfo(name = ResponseClass.TIMEZONE_STRING)
     @SerializedName(ResponseClass.TIMEZONE_STRING)
-    var timezone: TimezoneEntity
+    var timezone: Timezone
 )

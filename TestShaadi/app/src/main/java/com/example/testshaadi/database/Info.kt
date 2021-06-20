@@ -7,7 +7,7 @@ import com.example.testshaadi.data.ResponseClass
 import com.google.gson.annotations.SerializedName
 
 @Entity(tableName = "info_table")
-data class InfoEntity(
+data class Info(
     @PrimaryKey
     @ColumnInfo(name = ResponseClass.SEED_STRING)
     @SerializedName(ResponseClass.SEED_STRING)

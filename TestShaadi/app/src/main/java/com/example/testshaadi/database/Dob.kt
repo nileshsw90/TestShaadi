@@ -7,7 +7,7 @@ import com.example.testshaadi.data.ResponseClass
 import com.google.gson.annotations.SerializedName
 
 @Entity(tableName = "dob_table")
-data class DobEntity(
+data class Dob(
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = ResponseClass.SRNO_STRING)
     var srNo: Int,

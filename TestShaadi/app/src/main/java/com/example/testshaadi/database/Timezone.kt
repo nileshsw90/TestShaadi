@@ -7,7 +7,7 @@ import com.example.testshaadi.data.ResponseClass
 import com.google.gson.annotations.SerializedName
 
 @Entity(tableName = "timezone_table")
-data class TimezoneEntity(
+data class Timezone(
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = ResponseClass.SRNO_STRING)
     var srNo: Int,

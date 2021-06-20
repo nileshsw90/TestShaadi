@@ -9,7 +9,7 @@ import androidx.room.Query
 interface UserDao {
 
     @Query("SELECT * from results_table")
-    fun getAllUsers(): List<ResultsEntity>
+    fun getAllUsers(): List<Results>
 
     /*@Query("SELECT * FROM user WHERE uid IN (:userIds)")
     fun loadAllByIds(userIds: IntArray): List<Results>
@@ -21,10 +21,10 @@ interface UserDao {
     fun findByName(first: String, last: String): User*/
 
     @Insert
-    fun insert(users: ResultsEntity)
+    fun insert(users: Results)
 
     @Delete
-    fun delete(user: ResultsEntity)
+    fun delete(user: Results)
 
     @Query("DELETE FROM results_table")
     fun nukeTable()

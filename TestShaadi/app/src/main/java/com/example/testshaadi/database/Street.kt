@@ -7,8 +7,10 @@ import com.example.testshaadi.data.ResponseClass
 import com.google.gson.annotations.SerializedName
 
 @Entity(tableName = "street_table")
-data class StreetEntity(
-    @PrimaryKey
+data class Street(
+    @PrimaryKey(autoGenerate = true)
+    @ColumnInfo(name = ResponseClass.SRNO_STRING)
+    var srNo: Int,
     @ColumnInfo(name = ResponseClass.NUMBER_STRING)
     @SerializedName(ResponseClass.NUMBER_STRING)
     var number: Int,

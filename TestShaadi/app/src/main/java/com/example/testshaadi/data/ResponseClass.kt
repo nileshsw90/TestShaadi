@@ -1,9 +1,7 @@
 package com.example.testshaadi.data
 
-import com.example.testshaadi.data.ResponseClass.Companion.INFO_STRING
-import com.example.testshaadi.data.ResponseClass.Companion.RESULTS_STRING
-import com.example.testshaadi.database.InfoEntity
-import com.example.testshaadi.database.ResultsEntity
+import com.example.testshaadi.database.Info
+import com.example.testshaadi.database.Results
 import com.google.gson.annotations.SerializedName
 
 class ResponseClass {
@@ -60,90 +58,230 @@ class ResponseClass {
 }
 
 data class ResponseData(
-    @SerializedName(RESULTS_STRING) var results: ArrayList<ResultsEntity>,
-    @SerializedName(INFO_STRING) var info: InfoEntity
+    @SerializedName(ResponseClass.RESULTS_STRING) var results: List<Results>,
+    @SerializedName(ResponseClass.INFO_STRING) var info: Info
 )
 
-/*data class Name(
-    @SerializedName(TITLE_STRING) var title: String,
-    @SerializedName(FIRST_STRING) var first: String,
-    @SerializedName(LAST_STRING) var last: String
+/*@Entity(tableName = "name_table")
+data class Name(
+    @PrimaryKey(autoGenerate = true)
+    @ColumnInfo(name = ResponseClass.SRNO_STRING)
+    var srNo: Int,
+    @ColumnInfo(name = ResponseClass.TITLE_STRING)
+    @SerializedName(ResponseClass.TITLE_STRING)
+    var title: String,
+    @ColumnInfo(name = ResponseClass.FIRST_STRING)
+    @SerializedName(ResponseClass.FIRST_STRING)
+    var first: String,
+    @ColumnInfo(name = ResponseClass.LAST_STRING)
+    @SerializedName(ResponseClass.LAST_STRING)
+    var last: String
 )
 
+@Entity(tableName = "street_table")
 data class Street(
-    @SerializedName(NUMBER_STRING) var number: Int,
-    @SerializedName(NAME_STRING) var name: String
+    @PrimaryKey
+    @ColumnInfo(name = ResponseClass.NUMBER_STRING)
+    @SerializedName(ResponseClass.NUMBER_STRING)
+    var number: Int,
+    @ColumnInfo(name = ResponseClass.NAME_STRING)
+    @SerializedName(ResponseClass.NAME_STRING)
+    var name: String
 )
 
+@Entity(tableName = "coordinates_table")
 data class Coordinates(
-    @SerializedName(LATITUDE_STRING) var latitude: String,
-    @SerializedName(LONGITUDE_STRING) var longitude: String
+    @PrimaryKey(autoGenerate = true)
+    @ColumnInfo(name = ResponseClass.SRNO_STRING)
+    var srNo: Int,
+    @ColumnInfo(name = ResponseClass.LATITUDE_STRING)
+    @SerializedName(ResponseClass.LATITUDE_STRING)
+    var latitude: String,
+    @ColumnInfo(name = ResponseClass.LONGITUDE_STRING)
+    @SerializedName(ResponseClass.LONGITUDE_STRING)
+    var longitude: String
 )
 
+@Entity(tableName = "timezone_table")
 data class Timezone(
-    @SerializedName(OFFSET_STRING) var offset: String,
-    @SerializedName(DESCRIPTION_STRING) var description: String
+    @PrimaryKey(autoGenerate = true)
+    @ColumnInfo(name = ResponseClass.SRNO_STRING)
+    var srNo: Int,
+    @ColumnInfo(name = ResponseClass.OFFSET_STRING)
+    @SerializedName(ResponseClass.OFFSET_STRING)
+    var offset: String,
+    @ColumnInfo(name = ResponseClass.DESCRIPTION_STRING)
+    @SerializedName(ResponseClass.DESCRIPTION_STRING)
+    var description: String
 )
 
+@Entity(tableName = "location_table")
 data class Location(
-    @SerializedName(STREET_STRING) var street: Street,
-    @SerializedName(CITY_STRING) var city: String,
-    @SerializedName(STATE_STRING) var state: String,
-    @SerializedName(COUNTRY_STRING) var country: String,
-    @SerializedName(POSTCODE_STRING) var postcode: Int,
-    @SerializedName(COORDINATES_STRING) var coordinates: Coordinates,
-    @SerializedName(TIMEZONE_STRING) var timezone: Timezone
+    @PrimaryKey(autoGenerate = true)
+    @ColumnInfo(name = ResponseClass.SRNO_STRING)
+    var srNo: Int,
+    @ColumnInfo(name = ResponseClass.STREET_STRING)
+    @SerializedName(ResponseClass.STREET_STRING)
+    var street: Street,
+    @ColumnInfo(name = ResponseClass.CITY_STRING)
+    @SerializedName(ResponseClass.CITY_STRING)
+    var city: String,
+    @ColumnInfo(name = ResponseClass.STATE_STRING)
+    @SerializedName(ResponseClass.STATE_STRING)
+    var state: String,
+    @ColumnInfo(name = ResponseClass.COUNTRY_STRING)
+    @SerializedName(ResponseClass.COUNTRY_STRING)
+    var country: String,
+    @ColumnInfo(name = ResponseClass.POSTCODE_STRING)
+    @SerializedName(ResponseClass.POSTCODE_STRING)
+    var postcode: Int,
+    @ColumnInfo(name = ResponseClass.COORDINATES_STRING)
+    @SerializedName(ResponseClass.COORDINATES_STRING)
+    var coordinates: Coordinates,
+    @ColumnInfo(name = ResponseClass.TIMEZONE_STRING)
+    @SerializedName(ResponseClass.TIMEZONE_STRING)
+    var timezone: Timezone
 )
 
+@Entity(tableName = "login_table")
 data class Login(
-    @SerializedName(UUID_STRING) var uuid: String,
-    @SerializedName(USERNAME_STRING) var username: String,
-    @SerializedName(PASSWORD_STRING) var password: String,
-    @SerializedName(SALT_STRING) var salt: String,
-    @SerializedName(MD5_STRING) var md5: String,
-    @SerializedName(SHA1_STRING) var sha1: String,
-    @SerializedName(SHA256_STRING) var sha256: String
+    @PrimaryKey(autoGenerate = true)
+    @ColumnInfo(name = ResponseClass.SRNO_STRING)
+    var srNo: Int,
+    @ColumnInfo(name = ResponseClass.UUID_STRING)
+    @SerializedName(ResponseClass.UUID_STRING)
+    var uuid: String,
+    @ColumnInfo(name = ResponseClass.USERNAME_STRING)
+    @SerializedName(ResponseClass.USERNAME_STRING)
+    var username: String,
+    @ColumnInfo(name = ResponseClass.PASSWORD_STRING)
+    @SerializedName(ResponseClass.PASSWORD_STRING)
+    var password: String,
+    @ColumnInfo(name = ResponseClass.SALT_STRING)
+    @SerializedName(ResponseClass.SALT_STRING)
+    var salt: String,
+    @ColumnInfo(name = ResponseClass.MD5_STRING)
+    @SerializedName(ResponseClass.MD5_STRING)
+    var md5: String,
+    @ColumnInfo(name = ResponseClass.SHA1_STRING)
+    @SerializedName(ResponseClass.SHA1_STRING)
+    var sha1: String,
+    @ColumnInfo(name = ResponseClass.SHA256_STRING)
+    @SerializedName(ResponseClass.SHA256_STRING)
+    var sha256: String
 )
 
+@Entity(tableName = "dob_table")
 data class Dob(
-    @SerializedName(DATE_STRING) var date: String,
-    @SerializedName(AGE_STRING) var age: Int
+    @PrimaryKey(autoGenerate = true)
+    @ColumnInfo(name = ResponseClass.SRNO_STRING)
+    var srNo: Int,
+    @ColumnInfo(name = ResponseClass.DATE_STRING)
+    @SerializedName(ResponseClass.DATE_STRING)
+    var date: String,
+    @ColumnInfo(name = ResponseClass.AGE_STRING)
+    @SerializedName(ResponseClass.AGE_STRING)
+    var age: Int
 )
 
+@Entity(tableName = "registered_table")
 data class Registered(
-    @SerializedName(DATE_STRING) var date: String,
-    @SerializedName(AGE_STRING) var age: Int
+    @PrimaryKey(autoGenerate = true)
+    @ColumnInfo(name = ResponseClass.SRNO_STRING)
+    var srNo: Int,
+    @ColumnInfo(name = ResponseClass.DATE_STRING)
+    @SerializedName(ResponseClass.DATE_STRING)
+    var date: String,
+    @ColumnInfo(name = ResponseClass.AGE_STRING)
+    @SerializedName(ResponseClass.AGE_STRING)
+    var age: Int
 )
 
+@Entity(tableName = "id_table")
 data class Id(
-    @SerializedName(NAME_STRING) var name: String,
-    @SerializedName(VALUE_STRING) var value: String
+    @PrimaryKey(autoGenerate = true)
+    @ColumnInfo(name = ResponseClass.SRNO_STRING)
+    var srNo: Int,
+    @ColumnInfo(name = ResponseClass.NAME_STRING)
+    @SerializedName(ResponseClass.NAME_STRING)
+    var name: String,
+    @ColumnInfo(name = ResponseClass.VALUE_STRING)
+    @SerializedName(ResponseClass.VALUE_STRING)
+    var value: String
 )
 
+@Entity(tableName = "picture_table")
 data class Picture(
-    @SerializedName(LARGE_STRING) var large: String,
-    @SerializedName(MEDIUM_STRING) var medium: String,
-    @SerializedName(THUMBNAIL_STRING) var thumbnail: String
+    @PrimaryKey(autoGenerate = true)
+    @ColumnInfo(name = ResponseClass.SRNO_STRING)
+    var srNo: Int,
+    @ColumnInfo(name = ResponseClass.LARGE_STRING)
+    @SerializedName(ResponseClass.LARGE_STRING)
+    var large: String,
+    @ColumnInfo(name = ResponseClass.MEDIUM_STRING)
+    @SerializedName(ResponseClass.MEDIUM_STRING)
+    var medium: String,
+    @ColumnInfo(name = ResponseClass.THUMBNAIL_STRING)
+    @SerializedName(ResponseClass.THUMBNAIL_STRING)
+    var thumbnail: String
 )
 
+@Entity(tableName = "results_table")
 data class Results(
-    @SerializedName(GENDER_STRING) var gender: String,
-    @SerializedName(NAME_STRING) var name: Name,
-    @SerializedName(LOCATION_STRING) var location: Location,
-    @SerializedName(EMAIL_STRING) var email: String,
-    @SerializedName(LOGIN_STRING) var login: Login,
-    @SerializedName(DOB_STRING) var dob: Dob,
-    @SerializedName(REGISTERED_STRING) var registered: Registered,
-    @SerializedName(PHONE_STRING) var phone: String,
-    @SerializedName(CELL_STRING) var cell: String,
-    @SerializedName(ID_STRING) var id: Id,
-    @SerializedName(PICTURE_STRING) var picture: Picture,
-    @SerializedName(NAT_STRING) var nat: String
+    @PrimaryKey(autoGenerate = true)
+    @ColumnInfo(name = ResponseClass.SRNO_STRING)
+    var srNo: Int,
+    @ColumnInfo(name = ResponseClass.EMAIL_STRING)
+    @SerializedName(ResponseClass.EMAIL_STRING)
+    var email: String,
+    @ColumnInfo(name = ResponseClass.GENDER_STRING)
+    @SerializedName(ResponseClass.GENDER_STRING)
+    var gender: String,
+    @ColumnInfo(name = ResponseClass.NAME_STRING)
+    @SerializedName(ResponseClass.NAME_STRING)
+    var name: Name,
+    @ColumnInfo(name = ResponseClass.LOCATION_STRING)
+    @SerializedName(ResponseClass.LOCATION_STRING)
+    var location: Location,
+    @ColumnInfo(name = ResponseClass.LOGIN_STRING)
+    @SerializedName(ResponseClass.LOGIN_STRING)
+    var login: Login,
+    @ColumnInfo(name = ResponseClass.DOB_STRING)
+    @SerializedName(ResponseClass.DOB_STRING)
+    var dob: Dob,
+    @ColumnInfo(name = ResponseClass.REGISTERED_STRING)
+    @SerializedName(ResponseClass.REGISTERED_STRING)
+    var registered: Registered,
+    @ColumnInfo(name = ResponseClass.PHONE_STRING)
+    @SerializedName(ResponseClass.PHONE_STRING)
+    var phone: String,
+    @ColumnInfo(name = ResponseClass.CELL_STRING)
+    @SerializedName(ResponseClass.CELL_STRING)
+    var cell: String,
+    @ColumnInfo(name = ResponseClass.ID_STRING)
+    @SerializedName(ResponseClass.ID_STRING)
+    var id: Id,
+    @ColumnInfo(name = ResponseClass.PICTURE_STRING)
+    @SerializedName(ResponseClass.PICTURE_STRING)
+    var picture: Picture,
+    @ColumnInfo(name = ResponseClass.NAT_STRING)
+    @SerializedName(ResponseClass.NAT_STRING)
+    var nat: String
 )
 
+@Entity(tableName = "info_table")
 data class Info(
-    @SerializedName(SEED_STRING) var seed: String,
-    @SerializedName(RESULTS_STRING) var results: Int,
-    @SerializedName(PAGE_STRING) var page: Int,
-    @SerializedName(VERSION_STRING) var version: String
+    @PrimaryKey
+    @ColumnInfo(name = ResponseClass.SEED_STRING)
+    @SerializedName(ResponseClass.SEED_STRING)
+    var seed: String,
+    @ColumnInfo(name = ResponseClass.RESULTS_STRING)
+    @SerializedName(ResponseClass.RESULTS_STRING)
+    var results: Int,
+    @ColumnInfo(name = ResponseClass.PAGE_STRING)
+    @SerializedName(ResponseClass.PAGE_STRING)
+    var page: Int,
+    @ColumnInfo(name = ResponseClass.VERSION_STRING)
+    @SerializedName(ResponseClass.VERSION_STRING)
+    var version: String
 )*/

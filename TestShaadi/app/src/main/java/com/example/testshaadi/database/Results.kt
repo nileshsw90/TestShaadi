@@ -7,7 +7,7 @@ import com.example.testshaadi.data.ResponseClass
 import com.google.gson.annotations.SerializedName
 
 @Entity(tableName = "results_table")
-data class ResultsEntity(
+data class Results(
 
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = ResponseClass.SRNO_STRING)
@@ -20,19 +20,19 @@ data class ResultsEntity(
     var gender: String,
     @ColumnInfo(name = ResponseClass.NAME_STRING)
     @SerializedName(ResponseClass.NAME_STRING)
-    var name: NameEntity,
+    var name: Name,
     @ColumnInfo(name = ResponseClass.LOCATION_STRING)
     @SerializedName(ResponseClass.LOCATION_STRING)
-    var location: LocationEntity,
+    var location: Location,
     @ColumnInfo(name = ResponseClass.LOGIN_STRING)
     @SerializedName(ResponseClass.LOGIN_STRING)
-    var login: LoginEntity,
+    var login: Login,
     @ColumnInfo(name = ResponseClass.DOB_STRING)
     @SerializedName(ResponseClass.DOB_STRING)
-    var dob: DobEntity,
+    var dob: Dob,
     @ColumnInfo(name = ResponseClass.REGISTERED_STRING)
     @SerializedName(ResponseClass.REGISTERED_STRING)
-    var registered: RegisteredEntity,
+    var registered: Registered,
     @ColumnInfo(name = ResponseClass.PHONE_STRING)
     @SerializedName(ResponseClass.PHONE_STRING)
     var phone: String,
@@ -41,10 +41,10 @@ data class ResultsEntity(
     var cell: String,
     @ColumnInfo(name = ResponseClass.ID_STRING)
     @SerializedName(ResponseClass.ID_STRING)
-    var id: IdEntity,
+    var id: Id,
     @ColumnInfo(name = ResponseClass.PICTURE_STRING)
     @SerializedName(ResponseClass.PICTURE_STRING)
-    var picture: PictureEntity,
+    var picture: Picture,
     @ColumnInfo(name = ResponseClass.NAT_STRING)
     @SerializedName(ResponseClass.NAT_STRING)
     var nat: String

@@ -24,11 +24,13 @@ class RestClient {
             .readTimeout(30, TimeUnit.SECONDS)
             .build()
 
+
         val retrofit = Retrofit.Builder()
-            .client(okHttpClient)
             .baseUrl(baseUrl)
+            .client(okHttpClient)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
+
         return retrofit.create(CandidateListService::class.java).getCandidateList(pageDataSize)
     }
 

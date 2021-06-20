@@ -9,9 +9,9 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.testshaadi.database.ResultsEntity
+import com.example.testshaadi.database.Results
 
-class RecyclerAdapter(var context: Context, private val userList: List<ResultsEntity>) :
+class RecyclerAdapter(var context: Context, private val userList: List<Results>) :
     RecyclerView.Adapter<RecyclerAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -38,7 +38,7 @@ class RecyclerAdapter(var context: Context, private val userList: List<ResultsEn
         var description: TextView = view.findViewById(R.id.tv_description)
         var latlng: TextView = view.findViewById(R.id.tv_latlng)
 
-        fun bindPhoto(userList: ResultsEntity) {
+        fun bindPhoto(userList: Results) {
 
             val fullNameStr = "${userList.name.title} ${userList.name.first} ${userList.name.last}"
             fullname.setText(fullNameStr)
