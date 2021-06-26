@@ -4,9 +4,10 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.example.testshaadi.data.ResponseClass
+import com.example.testshaadi.data.ResponseClass.Companion.INFO_TABLE_STRING
 import com.google.gson.annotations.SerializedName
 
-@Entity(tableName = "info_table")
+@Entity(tableName = INFO_TABLE_STRING)
 data class Info(
     @PrimaryKey
     @ColumnInfo(name = ResponseClass.SEED_STRING)

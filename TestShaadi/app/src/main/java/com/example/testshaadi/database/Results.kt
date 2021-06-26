@@ -4,9 +4,10 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.example.testshaadi.data.ResponseClass
+import com.example.testshaadi.data.ResponseClass.Companion.RESULTS_TABLE_STRING
 import com.google.gson.annotations.SerializedName
 
-@Entity(tableName = "results_table")
+@Entity(tableName = RESULTS_TABLE_STRING)
 data class Results(
 
     @PrimaryKey(autoGenerate = true)

@@ -11,19 +11,19 @@ import java.util.concurrent.TimeUnit
 class RestClient {
 
     private var baseUrl: String = "https://randomuser.me/"
+    private val timeOut: Long = 60
 
     fun callCandidateList(pageDataSize: Int): Call<ResponseData> {
 
         val interceptor = HttpLoggingInterceptor()
-        interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+        interceptor.level = HttpLoggingInterceptor.Level.BODY;
 
         val okHttpClient = OkHttpClient.Builder()
             .addInterceptor(interceptor) // same for .addInterceptor(...)
-            .connectTimeout(30, TimeUnit.SECONDS) //Backend is really slow
-            .writeTimeout(30, TimeUnit.SECONDS)
-            .readTimeout(30, TimeUnit.SECONDS)
+            .connectTimeout(timeOut, TimeUnit.SECONDS) //Backend is really slow
+            .writeTimeout(timeOut, TimeUnit.SECONDS)
+            .readTimeout(timeOut, TimeUnit.SECONDS)
             .build()
-
 
         val retrofit = Retrofit.Builder()
             .baseUrl(baseUrl)

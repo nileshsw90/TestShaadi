@@ -4,9 +4,10 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.example.testshaadi.data.ResponseClass
+import com.example.testshaadi.data.ResponseClass.Companion.LOGIN_TABLE_STRING
 import com.google.gson.annotations.SerializedName
 
-@Entity(tableName = "login_table")
+@Entity(tableName = LOGIN_TABLE_STRING)
 data class Login(
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = ResponseClass.SRNO_STRING)

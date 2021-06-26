@@ -1,12 +1,12 @@
 package com.example.testshaadi
 
-import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.room.Room
+import com.example.testshaadi.data.ResponseClass
 import com.example.testshaadi.data.ResponseData
 import com.example.testshaadi.database.AppDatabase
 import com.example.testshaadi.database.Results
@@ -15,7 +15,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), Callback<ResponseData> {
 
     private lateinit var adapter: RecyclerAdapter
     private lateinit var linearLayoutManager: LinearLayoutManager
@@ -26,48 +26,44 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-
         recyclerView = findViewById(R.id.rv_profile_details)
 
-        linearLayoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+        linearLayoutManager = LinearLayoutManager(
+            this, LinearLayoutManager.HORIZONTAL,
+            false
+        )
         recyclerView.layoutManager = linearLayoutManager
+        adapter = RecyclerAdapter(this, users)
+        recyclerView.adapter = adapter
 
+        RestClient().callCandidateList(10).enqueue(this)
+    }
 
-        val call = RestClient().callCandidateList(10)
+    override fun onResponse(call: Call<ResponseData>, response: Response<ResponseData>) {
+        val responseData = response.body() ?: return
+        Log.e("MainActivity", "onResponse $responseData")
+        val db = Room
+            .databaseBuilder(this, AppDatabase::class.java, ResponseClass.DATABASE_NAME)
+            .allowMainThreadQueries()
+            .build()
 
-        val context: Context = this
+        val userDao = db.userDao()
 
-        call.enqueue(object : Callback<ResponseData> {
-            override fun onResponse(call: Call<ResponseData>, response: Response<ResponseData>) {
-                val responseData = response.body() ?: return
-                Log.e("MainActivity", "onResponse $responseData")
-                val db = Room
-                    .databaseBuilder(context, AppDatabase::class.java, "RoomBook")
-                    .allowMainThreadQueries()
-                    .build()
+        //userDao.nukeTable()
 
-                val userDao = db.userDao()
+        Log.e("MainActivity", "responseData " + responseData.results.size)
 
-                userDao.nukeTable()
+        for (i in 0..responseData.results.size - 1) {
+            userDao.insert(responseData.results[i])
+        }
+        users = userDao.getAllUsers()
+        Log.e("MainActivity", "users " + users.size)
+        adapter = RecyclerAdapter(this, users)
+        recyclerView.adapter = adapter
+    }
 
-                Log.e("MainActivity", "responseData " + responseData.results.size)
-
-                for (i in 0..responseData.results.size - 1) {
-                    userDao.insert(responseData.results[i])
-                }
-                users = userDao.getAllUsers()
-                Log.e("MainActivity", "users " + users.size)
-
-                adapter = RecyclerAdapter(context, users)
-                recyclerView.adapter = adapter
-
-            }
-
-            override fun onFailure(call: Call<ResponseData>, t: Throwable) {
-                Log.e("MainActivity", "onFailure")
-            }
-        })
-
+    override fun onFailure(call: Call<ResponseData>, t: Throwable) {
+        Log.e("MainActivity", "onFailure")
     }
 
 }
