@@ -2,7 +2,9 @@ package com.example.testshaadi
 
 import android.os.Bundle
 import android.util.Log
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.room.Room
@@ -10,12 +12,11 @@ import com.example.testshaadi.data.ResponseClass
 import com.example.testshaadi.data.ResponseData
 import com.example.testshaadi.database.AppDatabase
 import com.example.testshaadi.database.Results
-import com.example.testshaadi.repository.RestClient
+import com.example.testshaadi.viewmodels.UserViewModel
 import retrofit2.Call
-import retrofit2.Callback
 import retrofit2.Response
 
-class MainActivity : AppCompatActivity(), Callback<ResponseData> {
+class MainActivity : AppCompatActivity() {
 
     private lateinit var adapter: RecyclerAdapter
     private lateinit var linearLayoutManager: LinearLayoutManager
@@ -33,17 +34,13 @@ class MainActivity : AppCompatActivity(), Callback<ResponseData> {
             false
         )
         recyclerView.layoutManager = linearLayoutManager
-        adapter = RecyclerAdapter(this, users)
-        recyclerView.adapter = adapter
 
-        RestClient().callCandidateList(10).enqueue(this)
-    }
+        val profileViewModel: UserViewModel by viewModels()
+        profileViewModel.fetchUserDetails(10)
+        Log.e("MainActivity", "onResponse ${profileViewModel.userData.value?.size}")
 
-    override fun onResponse(call: Call<ResponseData>, response: Response<ResponseData>) {
-        val responseData = response.body() ?: return
-        Log.e("MainActivity", "onResponse $responseData")
         val db = Room
-            .databaseBuilder(this, AppDatabase::class.java, ResponseClass.DATABASE_NAME)
+            .databaseBuilder(application, AppDatabase::class.java, ResponseClass.DATABASE_NAME)
             .allowMainThreadQueries()
             .build()
 
@@ -51,19 +48,19 @@ class MainActivity : AppCompatActivity(), Callback<ResponseData> {
 
         //userDao.nukeTable()
 
-        Log.e("MainActivity", "responseData " + responseData.results.size)
+        profileViewModel.userData.observe(this, Observer {
+            for (i in 0..profileViewModel.userData.value!!.size - 1) {
+                userDao.insert(profileViewModel.userData.value!!.get(i))
+            }
 
-        for (i in 0..responseData.results.size - 1) {
-            userDao.insert(responseData.results[i])
-        }
-        users = userDao.getAllUsers()
-        Log.e("MainActivity", "users " + users.size)
-        adapter = RecyclerAdapter(this, users)
-        recyclerView.adapter = adapter
-    }
+            users = userDao.getAllUsers()
 
-    override fun onFailure(call: Call<ResponseData>, t: Throwable) {
-        Log.e("MainActivity", "onFailure")
+            Log.e("MainActivity", "users " + users.size)
+            adapter = RecyclerAdapter(this, users)
+            recyclerView.adapter = adapter
+
+        })
+
     }
 
 }
