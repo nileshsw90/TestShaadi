@@ -19,15 +19,9 @@ class UserViewModel : ViewModel(), Callback<ResponseData> {
     }
 
     override fun onResponse(call: Call<ResponseData>, response: Response<ResponseData>) {
-
         val responseData = response.body() ?: return
-
-        Log.e("UserViewModel", "onResponse $responseData")
-
         userData.value = responseData.results
-
         Log.e("UserViewModel", "responseData " + userData.value!!.size)
-
     }
 
     override fun onFailure(call: Call<ResponseData>, t: Throwable) {

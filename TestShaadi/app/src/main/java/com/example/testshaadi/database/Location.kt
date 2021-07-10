@@ -26,7 +26,7 @@ data class Location(
     var country: String,
     @ColumnInfo(name = ResponseClass.POSTCODE_STRING)
     @SerializedName(ResponseClass.POSTCODE_STRING)
-    var postcode: Int,
+    var postcode: String,
     @ColumnInfo(name = ResponseClass.COORDINATES_STRING)
     @SerializedName(ResponseClass.COORDINATES_STRING)
     var coordinates: Coordinates,

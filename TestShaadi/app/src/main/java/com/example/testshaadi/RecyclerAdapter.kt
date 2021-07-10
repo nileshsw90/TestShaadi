@@ -7,64 +7,55 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.testshaadi.database.Results
+import com.example.testshaadi.databinding.TextRowItemBinding
 
 class RecyclerAdapter(var context: Context, private val userList: List<Results>) :
     RecyclerView.Adapter<RecyclerAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(context).inflate(R.layout.text_row_item, parent, false)
-        return ViewHolder(view)
+        val inflater = LayoutInflater.from(context)
+        val adapterRecyclerBinding: TextRowItemBinding =
+            DataBindingUtil.inflate(inflater, R.layout.text_row_item, parent, false)
+        return ViewHolder(adapterRecyclerBinding)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bindPhoto(userList[position])
     }
 
-    override fun getItemCount(): Int {
-        Log.e("RecyclerAdapter", "users " + userList.size)
-        return userList.size
-    }
+    override fun getItemCount(): Int = userList.size
 
-    class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-
-        var userImage: ImageView = view.findViewById(R.id.icon)
-        var fullname: TextView = view.findViewById(R.id.tv_fullname)
-        var ageHeight: TextView = view.findViewById(R.id.tv_age_height)
-        var gender: TextView = view.findViewById(R.id.tv_gender)
-        var name: TextView = view.findViewById(R.id.tv_fullname1)
-        var description: TextView = view.findViewById(R.id.tv_description)
-        var latlng: TextView = view.findViewById(R.id.tv_latlng)
+    class ViewHolder(val binding: TextRowItemBinding) : RecyclerView.ViewHolder(binding.root) {
 
         fun bindPhoto(userList: Results) {
 
-            val fullNameStr = "${userList.name.title} ${userList.name.first} ${userList.name.last}"
-            fullname.setText(fullNameStr)
+            binding.apply {
 
-            val ageHeightStr = "${userList.dob.age} yrs, Date of Birth ${userList.dob.date}"
-            ageHeight.setText(ageHeightStr)
+                tvFullname.text =
+                    "${userList.name.title} ${userList.name.first} ${userList.name.last}"
 
-            val genderStr = userList.gender
-            gender.setText(genderStr)
+                tvAgeHeight.text = "${userList.dob.age} yrs, Date of Birth ${userList.dob.date}"
 
-            val fullNameStr1 =
-                "About ${userList.name.title} ${userList.name.first} ${userList.name.last}"
-            fullname.setText(fullNameStr1)
+                tvGender.text = userList.gender
 
-            val desc =
-                "Street - ${userList.location.street.name} ${userList.location.street.number} /n" +
-                        "Country - ${userList.location.country} City - ${userList.location.city}"
-            description.setText(desc)
+                tvDescription.text =
+                    "Street - ${userList.location.street.name} ${userList.location.street.number} /n" +
+                            "Country - ${userList.location.country} City - ${userList.location.city}"
 
-            val latlngStr =
-                "Latitude - ${userList.location.coordinates.latitude} Longitude - ${userList.location.coordinates.longitude}"
-            latlng.setText(latlngStr)
+                tvLatlng.text =
+                    "Latitude - ${userList.location.coordinates.latitude} Longitude " +
+                            "- ${userList.location.coordinates.longitude}"
 
-            Glide.with(itemView)
-                .load(userList.picture.large)
-                .into(userImage)
+                Glide.with(itemView)
+                    .load(userList.picture.large)
+                    .into(icon)
+
+            }
+
         }
 
     }
