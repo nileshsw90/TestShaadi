@@ -35,20 +35,20 @@ class RecyclerAdapter(var context: Context, private val userList: List<Results>)
 
             binding.apply {
 
-                tvFullname.text =
-                    "${userList.name.title} ${userList.name.first} ${userList.name.last}"
+                /*tvFullName.text =
+                    "${userList.name.title} ${userList.name.first} ${userList.name.last}"*/
 
                 tvAgeHeight.text = "${userList.dob.age} yrs, Date of Birth ${userList.dob.date}"
 
                 tvGender.text = userList.gender
 
-                tvDescription.text =
+                /*tvDescription.text =
                     "Street - ${userList.location.street.name} ${userList.location.street.number} /n" +
-                            "Country - ${userList.location.country} City - ${userList.location.city}"
+                            "Country - ${userList.location.country} City - ${userList.location.city}"*/
 
-                tvLatlng.text =
+                /*tvLatlng.text =
                     "Latitude - ${userList.location.coordinates.latitude} Longitude " +
-                            "- ${userList.location.coordinates.longitude}"
+                            "- ${userList.location.coordinates.longitude}"*/
 
                 Glide.with(itemView)
                     .load(userList.picture.large)

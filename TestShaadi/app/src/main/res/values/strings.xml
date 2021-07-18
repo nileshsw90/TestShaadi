@@ -1,4 +1,9 @@
 <resources>
     <string name="app_name">TestShaadi</string>
     <string name="image">image</string>
+    <string name="street_tag"> Street - </string>
+    <string name="city_tag"> City - </string>
+    <string name="country_tag"> Country - </string>
+    <string name="latitude_tag"> Latitude - </string>
+    <string name="longitude_tag"> Longitude - </string>
 </resources>
